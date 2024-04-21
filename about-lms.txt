@@ -1,0 +1,9 @@
+  =>  Template Name    : LMS WITH JOB PORTAL
+
+  =>  Template Author Linkedin   : https://www.linkedin.com/in/thulasi-aakash-838aa0253?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app
+
+ =>   About            : This is a LEARNING MANAGEMENT SYSTEM.It provides all technical and non-technical courses and also JOB portal avaialable.
+
+ => Authors : T AAKASH, G MAHESH BABU, E CHARULATHA, M SUJITHA, G VENKATA SIVA VARAPRASAD
+ => College: VEMU INSTITUTE OF TECHNOLOGY
+  

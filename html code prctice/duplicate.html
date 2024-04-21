@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Featured Companies Actively Hiring</title>
+<style>
+    /* Reset default margin and padding */
+    body, h1, p {
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Basic styling */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+    }
+
+    /* Header styles */
+    h1 {
+        color: #333;
+        padding: 20px;
+    }
+
+    /* Slider container */
+    .slider-container {
+        display: flex;
+        overflow: hidden;
+        position: relative;
+    }
+
+    /* Slide styles */
+    .slide {
+        flex: 0 0 50%;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Company list */
+    .company-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    /* Company item */
+    .company {
+        margin: 10px;
+        text-align: center;
+    }
+
+    /* Role list */
+    .role-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    /* Role item */
+    .role {
+        margin: 10px;
+        text-align: center;
+    }
+
+    /* View all link */
+    .view-all {
+        margin-top: auto;
+        color: #007bff;
+        text-decoration: none;
+    }
+</style>
+</head>
+<body>
+<h1>Featured Companies Actively Hiring</h1>
+<div class="slider-container">
+    <!-- Interview questions by company -->
+    <div class="slide">
+        <h3>Interview questions by company</h3>
+        <div class="company-list">
+            <div class="company">
+                <img src="company1-logo.png" alt="Company 1 Logo">
+                <p>Company 1</p>
+                <p>100 interviews</p>
+            </div>
+            <div class="company">
+                <img src="company2-logo.png" alt="Company 2 Logo">
+                <p>Company 2</p>
+                <p>80 interviews</p>
+            </div>
+            <div class="company">
+                <img src="company3-logo.png" alt="Company 3 Logo">
+                <p>Company 3</p>
+                <p>120 interviews</p>
+            </div>
+            <!-- Add more company items here -->
+            <div class="company">
+                <img src="company4-logo.png" alt="Company 4 Logo">
+                <p>Company 4</p>
+                <p>90 interviews</p>
+            </div>
+            <div class="company">
+                <img src="company5-logo.png" alt="Company 5 Logo">
+                <p>Company 5</p>
+                <p>110 interviews</p>
+            </div>
+        </div>
+        <a href="#" class="view-all">View all companies</a>
+    </div>
+
+    <!-- Interview questions by role -->
+    <div class="slide">
+        <h3>Interview questions by role</h3>
+        <div class="role-list">
+            <div class="role">
+                <p>Software Engineer</p>
+                <p>200 questions</p>
+            </div>
+            <div class="role">
+                <p>Business Analyst</p>
+                <p>150 questions</p>
+            </div>
+            <div class="role">
+                <p>Consultant</p>
+                <p>180 questions</p>
+            </div>
+            <!-- Add more role items here -->
+            <div class="role">
+                <p>Project Manager</p>
+                <p>170 questions</p>
+            </div>
+            <div class="role">
+                <p>Data Scientist</p>
+                <p>190 questions</p>
+            </div>
+        </div>
+        <a href="#" class="view-all">View all roles</a>
+    </div>
+</div>
+</body>
+</html>

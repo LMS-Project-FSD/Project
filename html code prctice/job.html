@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select,
+    input[type="file"],
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23000000' width='24px' height='24px'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+      background-position: right 8px center;
+      background-repeat: no-repeat;
+      background-size: 24px;
+    }
+
+    button {
+      background-color: #007bff;
+      color: #fff;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #successMessage {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+      border-radius: 4px;
+      display: none;
+    }
+
+    .error {
+      border-color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>Job Application Form</h1>
+  <form id="jobApplicationForm" onsubmit="return validateForm()">
+    <label for="studentName">Student Name:</label>
+    <input type="text" id="studentName" name="studentName" placeholder="Enter your name" required>
+
+    <label for="rollNumber">Roll Number:</label>
+    <input type="text" id="rollNumber" name="rollNumber" placeholder="Enter your roll number" required>
+
+
+    <label for="studying">Studying:</label>
+    <input type="text" id="studying" name="studying" placeholder="studying" list="study">
+    <datalist id="study">
+        <option value="10th class">
+        <option value="12th class">
+        <option value="btech">
+        <!-- Add more colleges here -->
+      </datalist>
+
+    <label for="collegeName">College Name:</label>
+    <input type="text" id="collegeName" name="collegeName" placeholder="Enter your college name" list="colleges">
+
+    <datalist id="colleges">
+      <option value="vemu institute of technology">
+      <option value="College 2">
+      <option value="College 3">
+      <!-- Add more colleges here -->
+    </datalist>
+
+    <label for="department">Department:</label>
+    <select id="department" name="department" required>
+      <option value="" disabled selected>Select your department</option>
+      <option value="CSE">Computer Science and Engineering (CSE)</option>
+      <option value="EEE">Electrical and Electronics Engineering (EEE)</option>
+      <option value="ECE">Electronics and Communication Engineering (ECE)</option>
+      <option value="Civil">Civil Engineering</option>
+    </select>
+
+    <section style="border: 0.5px solid black;">
+    <label for="skills">Skills:</label><br>
+    <input type="checkbox" id="skill1" name="skills" value="Java">
+    <label for="skill1">Java</label><br>
+    <input type="checkbox" id="skill1" name="skills" value="python">
+    <label for="skill1">python</label><br>
+    <input type="checkbox" id="skill1" name="skills" value="html">
+    <label for="skill1">html</label><br>
+    <!-- Add other skills checkboxes here -->
+    </section><br>
+    <label for="jobType">Type of Job:</label>
+    <select id="jobType" name="jobType" required>
+      <option value="">Select...</option>
+      <option value="Full-time">Full-time</option>
+      <option value="Part-time">Part-time</option>
+      <option value="Internship">Internship</option>
+      <option value="Contract">Contract</option>
+    </select>
+
+    <label for="experience">Experience (in years):</label>
+    <input type="number" id="experience" name="experience" placeholder="Enter your experience in years" min="0" required>
+
+    <label for="tenMarks">10th Marks (CGPA or percentage):</label>
+    <input type="number" id="tenMarks" name="tenMarks" placeholder="Enter your 10th marks" min="0" required>
+
+    <label for="tenPassYear">Year of Passing 10th:</label>
+    <input type="number" id="tenPassYear" name="tenPassYear" placeholder="Enter your year of passing 10th" min="1900" max="2099" required>
+
+    <label for="interMarks">Intermediate Marks (CGPA or percentage):</label>
+    <input type="number" id="interMarks" name="interMarks" placeholder="Enter your intermediate marks" min="0" required>
+
+    <label for="interPassYear">Year of Passing Intermediate:</label>
+    <input type="number" id="interPassYear" name="interPassYear" placeholder="Enter your year of passing intermediate" min="1900" max="2099" required>
+
+    <label for="btechMarks">BTech Marks (CGPA or percentage):</label>
+    <input type="number" id="btechMarks" name="btechMarks" placeholder="Enter your BTech marks" min="0" required>
+
+    <label for="btechBacklogs">Backlogs in BTech:</label>
+    <input type="number" id="btechBacklogs" name="btechBacklogs" placeholder="Enter your number of backlogs in BTech" min="0" required>
+
+    <label for="resume">Resume (PDF or Word document):</label>
+    <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <div id="successMessage">
+    Application submitted successfully!
+  </div>
+
+  <script>
+    function validateForm() {
+      var form = document.getElementById("jobApplicationForm");
+      var inputs = form.querySelectorAll("input, select");
+      var isValid = true;
+
+      inputs.forEach(function(input) {
+        if (input.hasAttribute("required") && input.value.trim() === "") {
+          input.classList.add("error");
+          isValid = false;
+        } else {
+          input.classList.remove("error");
+        }
+      });
+
+      if (!isValid) {
+        alert("Please fill in all required fields.");
+      }
+
+      return isValid;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<?php
+
+@include 'config.php';
+
+session_start();
+
+if(isset($_POST['submit'])){
+
+   $email = mysqli_real_escape_string($conn, $_POST['email']);
+   $pass = md5($_POST['password']);
+
+   $select = "SELECT * FROM user_form WHERE email = '$email' AND password = '$pass'";
+   $result = mysqli_query($conn, $select);
+
+   if(mysqli_num_rows($result) > 0){
+
+      $row = mysqli_fetch_array($result);
+
+      if($row['user_type'] == 'admin'){
+         $_SESSION['admin_name'] = $row['name'];
+         header('location:admin_page.php');
+      }elseif($row['user_type'] == 'user'){
+         $_SESSION['user_name'] = $row['name'];
+         header('location:user_page.php');
+      }
+     
+   }else{
+      $error[] = 'Incorrect email or password!';
+   }
+
+};
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #71b7e6, #2779e4e4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .login-form {
+          width: 300px;
+          padding: 40px;
+          background-color: #fff;
+          border-radius: 10px;
+          box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.586);
+      }
+        .login-form input[type="text"],
+        .login-form input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 30px;
+            border: none;
+            border-bottom: 1px solid black;
+            outline: none;
+        }
+        .login-btn {
+            width: calc(100% - 20px);
+            padding: 10px;
+            background-color:#007bff ;
+            color:white; 
+            border:none; 
+            cursor:pointer; 
+            border-radius :5px
+        }
+        .social-icons {
+            margin-top: 20px;
+        }
+        .social-icons a {
+            display: inline-block;
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        .back a i{
+          position: relative;
+          bottom: 42vh;
+          left: -25vh;
+          background-color: #ffffff;
+          padding: 20px;
+          border-radius: 50%;
+          font-size: 25px;
+        }
+        .back a i:hover{
+          left: -27vh;
+          transition: 0.5s linear;
+
+        }
+        .back a i:active{
+          background-color: #1da1f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="back"><a href="homepage.php"><i class="fas fa-arrow-left" style="color: #333;"></i></a></div>
+    <div class="image" style="margin-right: 80px;"><img src="images/img4.png" alt="login"></div>
+    <div class="login-form">
+        <h2 style="text-align: center;">Login</h2>
+
+        <form action="" method="post">
+        <?php
+      if(isset($error)){
+         foreach($error as $error_msg){
+            echo '<span class="error-msg">'.$error_msg.'</span>';
+         }
+      }
+      ?>
+          <i class="fas fa-user"> Username:</i><br>
+          <input type="text" name="username" value="" placeholder="Enter Username"><br><br>
+
+          <i class="fas fa-lock"> Password:</i><br>
+          <input type="password" name="password" value="" placeholder="Enter Password"><br><br>
+
+          <input type='submit' class='login-btn' value='Login'>
+          
+        </form> 
+
+        <p style="text-align: center;">Or Sign Up Using</p>
+
+        <!-- Add your social media links here -->
+        <div class="social-icons" style="text-align: center;">
+            <a href="#"><i class="fab fa-facebook-f" style="color: #3b5998;"></i></a>
+            <a href="#"><i class="fab fa-twitter" style="color: #1da1f2;"></i></a>
+            <a href="#"><i class="fab fa-google" style="color: #db4437;"></i></a>
+        </div>
+
+        <br>
+        <div style="text-align: center;"> Have not account yet?<a href='registration.php'>SIGN UP</a></div>
+
+    </div>
+
+</body>
+</html>
+

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Page</title>
+</head>
+<body>
+  <div class="container">
+    <h2>WELCOME TO CAREER CATALYST REGISTRATION PAGE</h2>
+    <form action="register.php" method="POST" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="email">Email ID:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="mobile">Mobile Number:</label>
+        <input type="tel" id="mobile" name="mobile" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="altMobile">Alternative Mobile Number:</label>
+        <input type="tel" id="altMobile" name="altMobile">
+      </div>
+      
+      <div class="form-group">
+        <label>Gender:</label>
+        <div class="gender-options">
+          <label for="male"><input type="radio" id="male" name="gender" value="male" required> Male</label>
+          <label for="female"><input type="radio" id="female" name="gender" value="female" required> Female</label>
+          <label for="transgender"><input type="radio" id="transgender" name="gender" value="transgender" required> Transgender</label>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="address">Address:</label>
+        <textarea id="address" name="address" rows="2" required></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label for="permanentAddress">Permanent Address:</label>
+        <textarea id="permanentAddress" name="permanentAddress" rows="2" required></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label for="district">District:</label>
+        <input type="text" id="district" name="district" required>
+    </div>
+      
+    <div class="form-group">
+      <label for="pincode">Pincode:</label>
+      <input type="text" id="pincode" name="pincode" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="state">State:</label>
+      <input type="text" id="state" name="state" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="education">Education Qualification:</label>
+      <select id="education" name="education" required>
+        <option value="">Select Education</option>
+        <option value="High School">High School</option>
+        <option value="Undergraduate">Undergraduate</option>
+        <option value="Postgraduate">Postgraduate</option>
+      </select>
+    </div>
+    
+    <div class="form-group">
+      <label for="grade">Grade:</label>
+      <input type="text" id="grade" name="grade" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="languages">Top Programming Languages:</label>
+      <div class="language-options">
+        <label for="java"><input type="checkbox" id="java" name="languages[]" value="Java"> Java</label>
+        <label for="python"><input type="checkbox" id="python" name="languages[]" value="Python"> Python</label>
+        <label for="javascript"><input type="checkbox" id="javascript" name="languages[]" value="JavaScript"> JavaScript</label>
+        <label for="cpp"><input type="checkbox" id="cpp" name="languages[]" value="C++"> C++</label>
+        <label for="csharp"><input type="checkbox" id="csharp" name="languages[]" value="C#"> C#</label>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="experienceRating">Experience Rating:</label>
+      <div class="rating-options">
+        <label for="experience1"><input type="radio" id="experience1" name="experienceRating" value="1" required> 1</label>
+        <label for="experience2"><input type="radio" id="experience2" name="experienceRating" value="2" required> 2</label>
+        <label for="experience3"><input type="radio" id="experience3" name="experienceRating" value="3" required> 3</label>
+        <label for="experience4"><input type="radio" id="experience4" name="experienceRating" value="4" required> 4</label>
+        <label for="experience5"><input type="radio" id="experience5" name="experienceRating" value="5" required> 5</label>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label for="resume">Upload Resume:</label>
+      <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required class="file-upload">
+    </div>
+    
+    <div class="form-group">
+      <label for="github">GitHub Link:</label>
+      <input type="url" id="github" name="github">
+    </div>
+    
+    <div class="form-group">
+      <label for="certificates">Certificates:</label>
+      <textarea id="certificates" name="certificates" rows="3"></textarea>
+    </div>
+    
+    <div class="form-group">
+      <label for="profilePic">Upload Profile Picture:</label>
+      <input type="file" id="profilePic" name="profilePic" accept="image/*" required class="file-upload" onchange="previewProfilePic(event)">
+      <img id="profilePreview" src="#" alt="Profile Preview">
+    </div>
+    
+    <div class="form-group">
+      <button type="submit">Register</button>
+    </div>
+    <?php
+$servername = "localhost";
+$username = "root"; // Corrected username, without leading or trailing spaces
+$password = ""; // Provide your MySQL root user password here
+$dbname = "your_database_name";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Prepare and bind SQL statement
+    $stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, mobile, alt_mobile, gender, address, permanent_address, district, pincode, state, education, grade, languages, experience_rating, github_link, certificates, profile_pic, resume) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+    // Bind parameters
+    $stmt->bind_param("sssssssssssssssssss", $firstName, $lastName, $email, $mobile, $altMobile, $gender, $address, $permanentAddress, $district, $pincode, $state, $education, $grade, $languages, $experienceRating, $githubLink, $certificates, $profilePic, $resume);
+
+    // Retrieve form data
+    $firstName = $_POST['firstName'];
+    $lastName = $_POST['lastName'];
+    $email = $_POST['email'];
+    $mobile = $_POST['mobile'];
+    $altMobile = $_POST['altMobile'];
+    $gender = $_POST['gender'];
+    $address = $_POST['address'];
+    $permanentAddress = $_POST['permanentAddress'];
+    $district = $_POST['district'];
+    $pincode = $_POST['pincode'];
+    $state = $_POST['state'];
+    $education = $_POST['education'];
+    $grade = $_POST['grade'];
+    $languages = implode(', ', $_POST['languages']);
+    $experienceRating = $_POST['experienceRating'];
+    $githubLink = $_POST['github'];
+    $certificates = $_POST['certificates'];
+
+    // Handle file uploads
+    $profilePic = $_FILES['profilePic']['name'];
+    $tempProfilePic = $_FILES['profilePic']['tmp_name'];
+    move_uploaded_file($tempProfilePic, "uploads/profile_pics/$profilePic");
+
+    $resume = $_FILES['resume']['name'];
+    $tempResume = $_FILES['resume']['tmp_name'];
+    move_uploaded_file($tempResume, "uploads/resumes/$resume");
+
+    // Execute the SQL statement
+    if ($stmt->execute() === TRUE) {
+        echo "New record created successfully";
+    } else {
+        echo "Error: " . $stmt->error;
+    }
+
+    // Close statement and database connection
+    $stmt->close();
+    $conn->close();
+}
+?>
+
+    </form>
+  </div>
+
+  <script>
+    function previewProfilePic(event) {
+      var profilePreview = document.getElementById('profilePreview');
+      profilePreview.src = URL.createObjectURL(event.target.files[0]);
+    }
+  </script>
+</body>
+</html>
